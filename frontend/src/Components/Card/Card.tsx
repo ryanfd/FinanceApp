@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import "./Card.css"
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   price: number;
 }
 
-const Card = ({companyName, ticker, price}: Props) => {
+const Card : React.FC<Props> = ({companyName, ticker, price}: Props) : JSX.Element => {
   return (
     <div className='card'>
         <img src="https://gcaptain.com/wp-content/uploads/2014/04/637px-Cutty_Sark_ship_1869_-_SLV_H91.250-164.jpg" alt="Image" />
