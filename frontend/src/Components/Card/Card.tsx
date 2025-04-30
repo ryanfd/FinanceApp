@@ -1,21 +1,23 @@
 import React, { JSX } from 'react'
 import "./Card.css"
+import { CompanySearch } from '../../company';
 
 interface Props {
-  companyName: string;
-  ticker: string;
-  price: number;
+  id: string;
+  searchResult: CompanySearch
 }
 
-const Card : React.FC<Props> = ({companyName, ticker, price}: Props) : JSX.Element => {
+const Card : React.FC<Props> = ({id, searchResult}: Props) : JSX.Element => {
   return (
     <div className='card'>
-        <img src="https://gcaptain.com/wp-content/uploads/2014/04/637px-Cutty_Sark_ship_1869_-_SLV_H91.250-164.jpg" alt="Image" />
+        <img src="https://gcaptain.com/wp-content/uploads/2014/04/637px-Cutty_Sark_ship_1869_-_SLV_H91.250-164.jpg" alt="company logo" />
         <div className='details'>
-            <h2>{companyName} ({ticker})</h2>
-            <p>${price}</p>
+            <h2>{searchResult.name} ({searchResult.symbol})</h2>
+            <p>{searchResult.currency}</p>
         </div>
-        <p className='info'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore quia pariatur rem dolorum, repudiandae eius blanditiis magni odio amet nulla corporis impedit eum, aperiam atque in aspernatur, numquam excepturi ducimus!</p>
+        <p className='info'>
+          {searchResult.exchangeShortName} - {searchResult.stockExchange}
+        </p>
     </div>
     
   )
