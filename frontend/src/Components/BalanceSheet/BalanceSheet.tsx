@@ -65,13 +65,13 @@ const BalanceSheet = (props: Props) => {
     const ticker = useOutletContext<string>();
     const [balanceSheet, setBalanceSheet] = useState<CompanyBalanceSheet>();
     useEffect(() => {
-        const getData = async () => {
+        const getBalanceSheetData = async () => {
             const value = await getBalanceSheet(ticker!);
             // only get most recent balance sheet
             // can get everything if you want, would want to use a table instead
             setBalanceSheet(value?.data[0]); 
         };
-        getData();
+        getBalanceSheetData();
     }, []);
 
   return (
