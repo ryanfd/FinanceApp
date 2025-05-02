@@ -20,7 +20,7 @@ const DesignGuide = (props: Props) => {
             <h2>This is the Stockinator's design page. This is where we will house various design aspects of the app.</h2>
 
             <RatioList data={testIncomeStatementData} config={tableConfig} />
-            <Table />
+            <Table config={testIncomeStatementData} data={tableConfig} />
 
             <h3>
                 Table - Table takes in a configuration object and company data as
