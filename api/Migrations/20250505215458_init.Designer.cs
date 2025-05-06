@@ -11,7 +11,7 @@ using api.Data;
 
 namespace api.Migrations
 {
-    [DbContext(typeof(ApplicationBDContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     [Migration("20250505215458_init")]
     partial class init
     {
