@@ -8,9 +8,9 @@ import axios from "axios";
 type UserContextType = {
     user: UserProfile | null;
     token: string | null;
-    registerUser: (email: string, username: string, password: string) => void;
-    loginUser: (username: string, password: string) => void;
-    logoutUser: () => void;
+    registerUser: (email: string, userName: string, password: string) => void;
+    loginUser: (userName: string, password: string) => void;
+    logout: () => void;
     isLoggedIn: () => boolean;
 };
 
@@ -39,12 +39,12 @@ export const UserProvider = ({ children } : Props) => {
         setIsReady(true);
     }, []);
 
-    const registerUser = async (email: string, username: string, password: string) => {
-        await registerApi(username, email, password).then((res) => {
+    const registerUser = async (email: string, userName: string, password: string) => {
+        await registerApi(userName, email, password).then((res) => {
             if (res) {
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {
-                    username: res?.data.username,
+                    userName: res?.data.userName,
                     email: res?.data.email
                 }
                 localStorage.setItem("user", JSON.stringify(userObj));
@@ -56,12 +56,12 @@ export const UserProvider = ({ children } : Props) => {
         }).catch((e) => toast.warning("Server Error Occurred"));
     };
 
-    const loginUser = async (username: string, password: string) => {
-        await loginApi(username, password).then((res) => {
+    const loginUser = async (userName: string, password: string) => {
+        await loginApi(userName, password).then((res) => {
             if (res) {
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {
-                    username: res?.data.username,
+                    userName: res?.data.userName,
                     email: res?.data.email
                 }
                 localStorage.setItem("user", JSON.stringify(userObj));
@@ -77,7 +77,7 @@ export const UserProvider = ({ children } : Props) => {
         return !!user;
     };
 
-    const logoutUser = () => {
+    const logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setUser(null);
@@ -86,7 +86,7 @@ export const UserProvider = ({ children } : Props) => {
     };
 
     return (
-        <UserContext.Provider value={{loginUser, user, token, logoutUser, isLoggedIn, registerUser}}>
+        <UserContext.Provider value={{loginUser, user, token, logout: logout, isLoggedIn, registerUser}}>
             {isReady ? children : null}
         </UserContext.Provider>
     );
