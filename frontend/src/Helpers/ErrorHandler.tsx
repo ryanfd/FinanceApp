@@ -24,4 +24,7 @@ export const handleError = (error: any) => {
     else if (err) {
         toast.warning(err?.data);
     }
+    else {
+        console.log(error.response);
+    }
 };
